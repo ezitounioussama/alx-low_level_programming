@@ -1,50 +1,47 @@
+#include "holberton.h"
 #include <stdio.h>
 
 /**
- * main - print first 98 Fibonacci numbers without using long long, malloc,
- * pointers, array/tables, or structures
- * Return: 0
+ * main - calls fibonacci
+ *
+ * Return: always 0
  */
-
 int main(void)
 {
-	int counter, overflow;
-	unsigned long a = 1;
-	unsigned long b = 1;
-	unsigned long sum = 0;
-	long a_head, a_tail, b_head, b_tail, sum_head, sum_tail;
-
-	printf("1");
-
-	for (counter = 2; counter < 93; counter++) /* will still print */
-	{
-		sum = a + b;
-		a = b;
-		b = sum;
-		printf(", %lu", sum);
-	}
-
-	a_head = a / 1000000000; /* break larger num into 2 parts */
-	a_tail = a % 1000000000;
-	b_head = b / 1000000000;
-	b_tail = b % 1000000000;
-
-	for (; counter < 99; counter++)
-	{
-		overflow = (a_tail + b_tail) / 1000000000;
-		sum_tail = (a_tail + b_tail) - (1000000000 * overflow);
-		sum_head = (a_head + b_head) + overflow;
-
-		printf(", %lu%lu", sum_head, sum_tail);
-
-		a_head = b_head;
-		a_tail = b_tail;
-		b_head = sum_head;
-		b_tail = sum_tail;
-	}
-
-
-	printf("\n");
-
+	fibonacci_print_98();
 	return (0);
+}
+
+/**
+ * fibonacci_print_98 - print first 98 fibonacci numbers
+ *
+ * Return: void
+ */
+void fibonacci_print_98(void)
+{
+	unsigned long i, a1, a2, b1, b2, c1, c2, m, r;
+
+	m = 1000000000000000000;
+	a1 = 0;
+	a2 = 1;
+	b1 = 0;
+	b2 = 2;
+	for (i = 0; i < 98; i++)
+	{
+		if (a1)
+			printf("%lu", a1);
+		printf("%lu", a2);
+		if (i < 97)
+			printf(", ");
+		c1 = a1;
+		c2 = a2;
+		a1 = b1;
+		a2 = b2;
+		b1 += c1;
+		b2 += c2;
+		r = b2 / m;
+		b2 %= m;
+		b1 += r;
+	}
+	printf("\n");
 }

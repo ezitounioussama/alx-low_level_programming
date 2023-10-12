@@ -1,47 +1,43 @@
 #include "holberton.h"
+#include <stddef.h>
 
 /**
- * compare - compare head and tail indices for match
- * @head: index starting from left of string
- * @tail: index starting from right of string, moving backwards
- * Return: 1 if palindrome, 0 if not
+ * _strlen - determines length of string
+ * @s: the string to check
+ *
+ * Return: the integer length
  */
-
-int compare(char *head, char *tail)
+int _strlen(char *s)
 {
+	return (*s ? 1 + _strlen(s + 1) : 0);
+}
 
-	if (head >= tail)
+/**
+ * do_is_palindrome - recursive palindrome check
+ * @s: the string to check
+ * @l: the string length
+ * @i: the string iterator
+ *
+ * Return: 1 if true, 0 if false
+ */
+int do_is_palindrome(char *s, int l, int i)
+{
+	if (i >= l / 2)
 		return (1);
-	if (*head == *tail)
-		return (compare(head + 1, tail - 1));
-
+	if (*(s + i) == *(s + l - i - 1))
+		return (do_is_palindrome(s, l, i + 1));
 	return (0);
 }
 
 /**
- * _strlen - find length of string to access last index
- * @s: string
- * Return: length
+ * is_palindrome - determines if a string is a palindrome
+ * @s: the string to check
+ *
+ * Return: 1 if true, 0 if false
  */
-
-int _strlen(char *s)
-{
-
-	if (*s == '\0')
-		return (0);
-	s++;
-	return (1 + (_strlen(s)));
-}
-
-/**
- * is_palindrome - check if palindrome
- * @s: string to check
- * Return: 1 if palindrome, 0 if not
- */
-
 int is_palindrome(char *s)
 {
-	int len = _strlen(s);
+	int l = _strlen(s);
 
-	return (compare(s, (s + len - 1)));
+	return (do_is_palindrome(s, l, 0));
 }

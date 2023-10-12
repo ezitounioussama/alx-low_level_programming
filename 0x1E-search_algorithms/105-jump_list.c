@@ -1,49 +1,47 @@
-#include <stdio.h>
 #include "search_algos.h"
 
 /**
- * jump_list - Search for value in sorted list using Jump search algorithm
- * @list: Pointer to head of list to search
- * @size: Nodes in list
- * @value: Value to search for
+ * jump_list - jump searches on singly linked list
+ * @list: pointer to head node
+ * @size: its size
+ * @value: value to search for
  *
- * Return: Pointer to first node where value is located
- * NULL if value not found in head or head is NULL
- * Print value of list every time compared with search value
+ * Return: the node found or NULL
  */
 listint_t *jump_list(listint_t *list, size_t size, int value)
 {
-	int jump, i;
-	listint_t *cur, *tmp;
+	size_t i = 0, j = sqrt(size), k = 0, last_j = 0;
+	listint_t *last = list;
 
 	if (!list)
 		return (NULL);
-	jump = sqrt(size);
-	cur = list;
-	do {
-		tmp = cur;
-		for (i = jump; cur->next && i > 0; --i, cur = cur->next)
-			;
-		printf("Value checked at index [%lu] = [%d]\n", cur->index, cur->n);
-		if (!cur->next)
-			break;
-	} while (cur->n < value);
-	printf("Value found between indexes [%lu] and [%lu]\n",
-		tmp->index, cur->index);
-	cur = tmp;
-	while (cur->n < value)
+
+	while (list->n < value)
 	{
-		printf("Value checked at index [%lu] = [%d]\n", cur->index, cur->n);
-		cur = cur->next;
-		if (cur->n == value)
-			return (printf("Value checked at index [%lu] = [%d]\n",
-				cur->index, cur->n), cur);
-		if (!cur->next)
-			return (printf("Value checked at index [%lu] = [%d]\n",
-				cur->index, cur->n), NULL);
+		for (last_j = i, last = list, k = 0; list->next && k < j; k++)
+		{
+			list = list->next;
+			i++;
+		}
+		printf("Value checked at index [%lu] = [%d]\n", i, list->n);
+		if (!list->next)
+			break;
 	}
-	if (cur->n == value)
-		return (printf("Value checked at index [%lu] = [%d]\n",
-			cur->index, cur->n), cur);
+
+	if (!list->next)
+		j = last_j;
+	else
+		j = i >= j ? i - j : 0;
+	printf("Value found between indexes [%lu] and [%lu]\n", j, i);
+	i = i >= size ? size - 1 : i;
+	list = last;
+	while (list)
+	{
+		printf("Value checked at index [%lu] = [%d]\n", j, list->n);
+		if (list->n == value)
+			return (list);
+		j++;
+		list = list->next;
+	}
 	return (NULL);
 }

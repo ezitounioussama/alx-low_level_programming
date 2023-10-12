@@ -1,20 +1,18 @@
 #include <stdio.h>
 
 /**
- *main - print 0123456789
- *Return: Always 0 (Success)
+ * main - Entry point
+ *
+ * Return: Always 0 (Success)
  */
-
 int main(void)
 {
-	int n = 0;
+	char c;
 
-	while (n < 10)
+	for (c = '0'; c <= '9'; c++)
 	{
-		printf("%i", n);
-		n++;
+		putchar(c);
 	}
 	putchar('\n');
-
 	return (0);
 }

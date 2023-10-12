@@ -1,17 +1,17 @@
 #include "holberton.h"
+#include <stddef.h>
 
 /**
- * factorial - find factorial of n
- * @n: number
- * Return: factorial of number, -1 if negative n
+ * factorial - returns factorial of given number
+ * @n: the number to factorial
+ *
+ * Return: the integer result, -1 on error
  */
-
 int factorial(int n)
 {
 	if (n < 0)
 		return (-1);
-	else if (n == 0 || n == 1)
-		return (n);
-	else
+	if (n > 0)
 		return (n * factorial(n - 1));
+	return (1);
 }

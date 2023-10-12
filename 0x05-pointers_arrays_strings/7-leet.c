@@ -1,27 +1,24 @@
 #include "holberton.h"
 
-/**
- * leet - encode string into 1337 leet
- * @s: string to manipulate
- * Return: string
- */
+#define LEETIN "aAeEoOtTlL"
+#define LEETOUT "4433007711"
 
+/**
+ * leet - encodes a string into 1337
+ * @s: the string to encode
+ *
+ * Return: char pointer
+ */
 char *leet(char *s)
 {
+	char *ret = s, *leetin = LEETIN, *leetout = LEETOUT;
+	int i = 0;
 
-	int a[11] = {'a', 'A', 'e', 'E', 'o', 'O', 't', 'T', 'l', 'L'};
-	int b[11] = {'4', '4', '3', '3', '0', '0', '7', '7', '1', '1'};
-
-	int i, j;
-
-	for (j = 0; s[j] != '\0'; j++)
+	for (; *s; s++)
 	{
-		for (i = 0; a[i] != '\0'; i++)
-		{
-			if (s[j] == a[i])
-				s[j] = b[i];
-		}
+		for (i = 0; leetin[i]; i++)
+			if (*s == leetin[i])
+				*s = leetout[i];
 	}
-
-	return (s);
+	return (ret);
 }

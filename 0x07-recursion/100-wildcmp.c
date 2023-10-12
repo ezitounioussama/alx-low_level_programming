@@ -1,42 +1,68 @@
-/**
- * substring_match - check if a substring after wildcard matches s1
- * @s1: one string
- * @s2: one string
- * @after_wldcd: placeholder for position right after wildcard
- * Return: 1 if matched, 0 if not
- */
+#include "holberton.h"
 
-int substring_match(char *s1, char *s2, char *after_wldcd)
+/**
+ * move_past_star - iterates past asterisk
+ * @s2: the second string, can contain wildcard
+ *
+ * Return: the pointer past star
+ */
+char *move_past_star(char *s2)
 {
-	if (*s1 == '\0' && *s2 == '\0')
-		return (1);
-	if (*s1 == '\0' && *s2 == '*')
-		return (substring_match(s1, s2 + 1, s2 + 1));
-	if (*s1 == '\0' && *s2 != '\0')
-		return (0);
 	if (*s2 == '*')
-		return (substring_match(s1, s2 + 1, s2 + 1));
-	if (*s1 == *s2)
-		return (substring_match(s1 + 1, s2 + 1, after_wldcd));
+		return (move_past_star(s2 + 1));
 	else
-		return (substring_match(s1 + 1, after_wldcd, after_wldcd));
+		return (s2);
 }
 
 /**
- * wildcmp - compare if string with wildcard mattches
- * @s1: one string
- * @s2: one string
- * Return: 1 if matched, 0 if not
+ * inception - makes magic a reality
+ * @s1: the first string
+ * @s2: the second string, can contain wildcard
+ *
+ * Return: 1 if identical, 0 if false
  */
+int inception(char *s1, char *s2)
+{
+	int ret = 0;
 
+	if (*s1 == 0)
+		return (0);
+	if (*s1 == *s2)
+		ret += wildcmp(s1 + 1, s2 + 1);
+	ret += inception(s1 + 1, s2);
+	return (ret);
+}
+
+/**
+ * wildcmp - compares two strings lexicographically
+ * @s1: the first string
+ * @s2: the second string, can contain wildcard
+ *
+ * Return: 1 if identical, 0 if false
+ */
 int wildcmp(char *s1, char *s2)
 {
-	if (*s1 == '\0' && *s2 == '\0')
+	int ret = 0;
+
+	if (!*s1 && *s2 == '*' && !*move_past_star(s2))
 		return (1);
 	if (*s1 == *s2)
-		return (wildcmp(s1 + 1, s2 + 1));
-	else if (*s2 == '*')
-		return (substring_match(s1, (s2 + 1), (s2 + 1)));
-	else
+	{
+		if (!*s1)
+			return (1);
+		return (wildcmp(s1 + 1, *s2 == '*' ? s2 : s2 + 1));
+	}
+	if (!*s1 || !s2)
 		return (0);
+	if (*s2 == '*')
+	{
+		s2 = move_past_star(s2);
+		if (!*s2)
+			return (1);
+		if (*s1 == *s2)
+			ret += wildcmp(s1 + 1, s2 + 1);
+		ret += inception(s1, s2);
+		return (!!ret);
+	}
+	return (0);
 }

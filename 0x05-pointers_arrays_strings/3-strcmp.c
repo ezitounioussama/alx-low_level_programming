@@ -1,39 +1,23 @@
 #include "holberton.h"
 
 /**
- * _strcmp - compare two strings
- * @s1: one string
- * @s2: one string
- * Return: int that tells num spaces in between
+ * _strcmp - performs lexicogarphic comparison of two strangs.
+ * @s1: the first strang
+ * @s2: the second strang
+ *
+ * Return: negative if s1 < s2, positive if s1 > s2, zero if s1 == s2
  */
-
 int _strcmp(char *s1, char *s2)
 {
-	int i = 0;
-
-	while (*(s1 + i) == *(s2 + i) && *(s1 + i))
-		i++;
-
-	if (*(s2 + i))
-		return (*(s1 + i) - *(s2 + i));
-	else
+	while (*s1 && *s2)
+	{
+		if (*s1 != *s2)
+			return (*s1 - *s2);
+		s1++;
+		s2++;
+	}
+	if (*s1 == *s2)
 		return (0);
+	else
+		return (*s1 < *s2 ? -1 : 1);
 }
-
-/* another method
-
-int _strcmp(char *s1, char *s2)
-{
-        // while neither strings have ended
-        while (*s1 != '\0' || *s2 != '\0')
-        {
-		// if element in arr1 in arr2 are diff, return difference
-                if (*s1 != *s2)
-                        return (*s1 - *s2);
-		// iterate index
-                s1++;
-                s2++;
-        }
-        return (0);
-}
-*/

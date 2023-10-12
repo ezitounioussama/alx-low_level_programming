@@ -1,20 +1,18 @@
 #include <stdio.h>
 
 /**
- *main - print lowercase a-z
- *Return: Always 0 (Success)
+ * main - Entry point
+ *
+ * Return: Always 0 (Success)
  */
-
 int main(void)
 {
-	char alpha = 'a';
+	char c;
 
-	while (alpha <= 'z')
+	for (c = 'a'; c <= 'z'; c++)
 	{
-		putchar(alpha);
-		alpha++;
+		putchar(c + 1);
 	}
 	putchar('\n');
-
 	return (0);
 }

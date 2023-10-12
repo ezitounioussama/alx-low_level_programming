@@ -1,33 +1,47 @@
 #include "holberton.h"
 
-/**
- * cap_string - capitalize first letter of each word
- * @s: string to manipulate
- * Return: string
- */
+#define SEPARATORS " \t\n,;.!?\"(){}"
 
+/**
+ * member - tests if a string contains a character
+ * @c: the character
+ * @s: the string
+ *
+ * Return: 1 if found, 0 otherwise
+ */
+int member(char c, char *s)
+{
+	for (; *s; s++)
+		if (*s == c)
+			return (1);
+	return (0);
+}
+
+/**
+ * _islower - checks if c is lowercase
+ * @c: the character to test case
+ *
+ * Return: 1 if c is lowercase, 0 otherwise
+ */
+int _islower(int c)
+{
+	return (c >= 'a' && c <= 'z');
+}
+
+/**
+ * cap_string - capitalizes each word of a string
+ * @s: the string to capitalize
+ *
+ * Return: char pointer
+ */
 char *cap_string(char *s)
 {
-	int i = 0;
+	char *ret = s;
 
-	/* check first index for capital */
-	if (s[i] >= 'a' && s[i] <= 'z')
-		s[i] = s[i] - 'a' + 'A';
-	i++;
-
-	while (s[i] != '\0') /* iterate through string */
-	{
-
-		/* if lowercase and prior char is separator, capitalize*/
-		if ((s[i] >= 'a' && s[i] <= 'z')
-		    && (s[i - 1] == ',' || s[i - 1] == ';' || s[i - 1] == '.' ||
-			s[i - 1] == '!' || s[i - 1] == '?' || s[i - 1] == '"' ||
-			s[i - 1] == '(' || s[i - 1] == ')' || s[i - 1] == '{' ||
-			s[i - 1] == '}' || s[i - 1] == ' ' || s[i - 1] == '\t'
-			|| s[i - 1] == '\n'))
-			s[i] = s[i] - 'a' + 'A';
-		i++;
-	}
-
-	return (s);
+	if (_islower(*s))
+		*s += 'A' - 'a';
+	while (*++s)
+		if (_islower(*s) && member(*(s - 1), SEPARATORS))
+			*s += 'A' - 'a';
+	return (ret);
 }
