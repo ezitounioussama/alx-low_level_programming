@@ -1,21 +1,30 @@
-File 0-puts_recursion.c is a function that prints a string, followed by a new line.
+# Recursion
 
-File 1-print_rev_recursion.c is a function that prints a string in reverse.
+## Requirements
+* Language: C
+* OS: Ubuntu 14.04 LTS
+* Compiler: gcc 4.8.4
+* Style guidelines: [Betty style] (https://github.com/holbertonschool/Betty/wiki)
 
-File 2-strlen_recursion.c is a function that returns the length of a string.
+## Synopsis
+This repository holds some projects I worked on for Holberton School. The goal is to learn coding and concepts through the C programming language.
 
-File 3-factorial.c is a function that returns the factorial of a given number.
+## Concepts to be learned in this repository:
+* what recursion is and how to use it
 
-File 4-pow_recursion.c is a function that returns the value of x raised to the power of y.
+## Description of what each file shows:
+0. a function that prints a string, followed by a new line (puts)
+1. a function that prints a string in reverse
+2. a function that returns the length of a string
+3. a function that returns the factorial of a given number
+4. a function that returns the value of x raised to the power of y (pow)
+5. a function that returns the natural square root of a number
+6. a function that returns 1 if the input integer is a prime number, otherwise return 0
+7. a function that returns 1 if a string is a palindrome and 0 if not
+8. a function that compares two strings and returns 1 if the strings can be considered identical, otherwise return 0
 
-File 5-sqrt_recursion.c is a function that returns the natural square root of a number.
+## Authors
+* Melissa Ng
 
-File 6-is_prime_number.c is a function that returns 1 if the input integer is a prime number, otherwise return 0.
-
-File 100-is_palindrome.c is a function that returns 1 if a string is a palindrome and 0 if not.
-
-File 101-wildcmp.c is a function that compares two strings and returns 1 if the strings can be considered identical, otherwise return 0. It uses the concept of wildcards.
-
-File _putchar.c is a file containing the _putchar function.
-
-File main.h is the header file containing the function prototypes.
+## License
+* The Holberton School
